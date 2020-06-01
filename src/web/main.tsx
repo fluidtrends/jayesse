@@ -9,6 +9,6 @@ import {
 /**
  * The main app renderer
  */
-export default async (props: AppProps) => {
+export const renderApp = async (props: AppProps) => {
     ReactDOM.render(<App {...props} />, document.getElementById('app'))
 }
