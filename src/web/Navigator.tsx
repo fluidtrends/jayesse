@@ -17,6 +17,7 @@ import {
  */
 const renderRoute = (route: any) => (
     <Route
+      key={route.id}
       path={route.path}
       render={props => (
           <route.component {...props} routes={route.routes} />
