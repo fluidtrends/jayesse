@@ -6,4 +6,9 @@ import {
     AppProps
 } from '.'
 
-export const renderApp = (props: AppProps) => ReactDOM.render(<App {...props} />, document.getElementById('app'))
+const props: AppProps = {
+    name: "app"
+}
+
+ReactDOM.render(<App {...props} />, document.getElementById('app'))
+
