@@ -11,59 +11,54 @@ import {
     NavigatorProps,
 } from '.'
 
-function Home() {
-    return <h2>Home</h2>;
-  }
-  
-  function About() {
-    return <h2>About</h2>;
-  }
-  
-  function Users() {
-    return <h2>Users</h2>;
-  }
-  
-const Router = () => {
-    return (
-        <BrowserRouter>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
-            </ul>
-          </nav>
-  
-          {/* A <Switch> looks through its children <Route>s and
-              renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </BrowserRouter>
-    )
-}
-
 export const Navigator: React.FC<NavigatorProps> = (props) => {
+  const renderLink = (props: any) => (
+    <li key={props.id}>
+      <Link to={props.path}>{props.title}</Link>
+    </li>
+  )
+
+  const renderRoute = (props: any) => (
+    <Route key={props.id} exact path={props.path} component={props.screen}/>
+  )
+
+  const makeRoutes = (chunks: any): any[] => {
+    let routes: any[] = []
+  
+    for(let chunkName in chunks) {
+      const screens = chunks[chunkName] && chunks[chunkName].screens
+
+      if (!screens || screens.length === 0) return []
+  
+      for(let screenName in screens) {
+        routes.push({
+          id: screenName,
+          name: screenName, 
+          screen: screens[screenName],
+          title: screenName,
+          path: screenName
+        })
+      }
+    }
+    return routes
+  }
+
+  const routes = makeRoutes(props.chunks)
+
     return (
         <div>
-        <p style={{  }}> Jayesse Web Navigator </p>
-        <Router/>
+        <BrowserRouter>
+          <div>
+            <nav>
+              <ul>
+              { routes.map((route: any) => renderLink(route)) }
+              </ul>
+            </nav>
+            <Switch>
+            { routes.map((route: any) => renderRoute(route)) }
+            </Switch>
+          </div>
+        </BrowserRouter>
       </div>
     )
 }

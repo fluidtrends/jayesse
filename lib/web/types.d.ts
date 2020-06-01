@@ -3,4 +3,5 @@ export interface AppProps {
     [key: string]: any;
 }
 export interface NavigatorProps {
+    [key: string]: any;
 }
