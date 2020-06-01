@@ -22,7 +22,8 @@
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*",
-    "src/**/*"
+    "src/**/*",
+    "assets/**/*"
   ],
   "dependencies": {
     "@types/react": "^16.9.35",
