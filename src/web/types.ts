@@ -4,5 +4,5 @@ export interface AppProps {
 }
 
 export interface NavigatorProps {
-    
+    [key: string]: any
 }
