@@ -1,13 +1,13 @@
 export interface ChunkProps {
     name: string
     config?: any
-    screens?: React.FC[]
+    screens?: Map<string, React.FC>
 }
 
 export interface AppProps {
     name: string
     config?: any
-    chunks: ChunkProps[]
+    chunks: Map<string, ChunkProps>
 }
 
 export interface NavigatorProps {
