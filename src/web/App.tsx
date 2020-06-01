@@ -8,8 +8,7 @@ import {
 export const App: React.FC<AppProps> = (props) => {
     return (
         <Fragment>
-            <p style={{  }}> config: { props.config }) </p>
-            <p style={{  }}> chunks: { props.chunks }) </p>
+            <p style={{  }}> app name: { props.name }) </p>
             <Navigator/>
         </Fragment>
     )

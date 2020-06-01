@@ -1,6 +1,6 @@
 export interface AppProps {
-    config?: any;
-    chunks?: any;
+    name: string;
+    [key: string]: any;
 }
 export interface NavigatorProps {
 }
