@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import {
     AppProps,
@@ -7,9 +7,11 @@ import {
 
 export const App: React.FC<AppProps> = (props) => {
     return (
-        <div>
-        <p style={{  }}> Jayesse Web App ({ props.name }) </p>
-        <Navigator/>
-        </div>
+        <Fragment>
+            <p style={{  }}> name: { props.name }) </p>
+            <p style={{  }}> config: { props.config }) </p>
+            <p style={{  }}> chunks: { props.chunks }) </p>
+            <Navigator/>
+        </Fragment>
     )
 }
