@@ -6,9 +6,7 @@ import {
     AppProps
 } from '.'
 
-const props: AppProps = {
-    name: "app"
-}
+import * as product from './product'
 
-ReactDOM.render(<App {...props} />, document.getElementById('app'))
+ReactDOM.render(<App {...product.props} />, document.getElementById('app'))
 
