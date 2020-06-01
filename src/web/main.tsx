@@ -6,13 +6,9 @@ import {
     AppProps
 } from '.'
 
-const defaultProps = {
-    name: "app"
-} as AppProps
-
-(async () => {
-    const propsPath = '__webapp'
-    const props = await import(`${propsPath}`) || defaultProps
+/**
+ * The main app renderer
+ */
+export const renderApp = async (props: AppProps) => {
     ReactDOM.render(<App {...props} />, document.getElementById('app'))
-})()
-
+}
