@@ -1,14 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { 
-    App,
-    AppProps
-} from '.'
+import { App, Guide, GuideProps } from '.'
+import resolve from '../resolve'
 
-/**
- * The main app renderer
- */
-export const renderApp = async (props: AppProps) => {
-    ReactDOM.render(<App {...props} />, document.getElementById('app'))
-}
+const guide = {
+    steps: [{
+        message: "Hey there, welcome to Carmel. I'm Chunky, your Carmel guide. Ready to get started?",
+        action: "Yeah, let's do this",
+        onAction: 1
+    },
+    {
+        message: "Cool so let's do this then",
+        action: "Download now"
+    }]
+} as GuideProps
+
+ReactDOM.render(<Guide {...guide}>
+    <App { ...resolve('web') } />
+</Guide>, document.getElementById('app'))
