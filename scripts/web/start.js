@@ -8,9 +8,6 @@ const makePacker = () => {
 
   const { WebPacker } = require(packerDir)
 
-  const stackDir = process.env.CARMEL_STACK_HOME
-  const contextDir = process.env.CARMEL_PRODUCT_HOME
-
   const destDir = path.resolve(contextDir, '.carmel', 'web')
   const templateFile = path.resolve(stackDir, 'assets', 'web', 'page.ejs')
   const entryFile = path.resolve(stackDir, 'src', 'web', 'main.tsx')
