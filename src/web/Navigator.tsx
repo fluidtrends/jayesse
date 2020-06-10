@@ -3,34 +3,41 @@ import React from 'react'
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom"
 
 import {
     NavigatorProps,
+    Screen
 } from '.'
 
 /**
  * 
  * @param route 
  */
-const renderRoute = (route: any) => (
+const renderRoute = (route: any, routes: any) => {
+  return (
     <Route
-      key={route.id}
+      exact
+      key={`${route.id}`}
       path={route.path}
       render={props => (
-          <route.component {...props} routes={route.routes} />
-        )}
+          <Screen {...props} route={route} routes={routes} />
+      )}
     />
-)
+)}
 
-export const Navigator: React.FC<NavigatorProps> = (props) => (
-  <Router>
+/**
+ * 
+ * @param props 
+ */
+export const Navigator: React.FC<NavigatorProps> = (props) => {
+  return (
+    <Router>
       <Switch>
         { props.routes.map((route: any, i: number) => (
-          renderRoute(route)
+          renderRoute(route, props.routes)
         ))}
       </Switch>
   </Router>
-)
+)}
