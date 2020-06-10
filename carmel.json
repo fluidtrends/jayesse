@@ -1,0 +1,7 @@
+{
+    "name": "jayesse",
+    "web": {
+        "entry": "src/web/main.tsx",
+        "template": "assets/web/page.ejs"
+    }
+}

@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.9.15",
+  "version": "1.9.16",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
@@ -25,7 +25,8 @@
     "src/**/*",
     "scripts/**/**",
     "assets/**/*",
-    "tsconfig.json"
+    "tsconfig.json",
+    "carmel.json"
   ],
   "dependencies": {
     "@types/react": "^16.9.35",
