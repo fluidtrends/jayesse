@@ -38,7 +38,7 @@ const linkDependencies = () => {
     fs.symlinkSync(path.resolve(stackDir, 'lib'), path.resolve(depsDir, stack), 'dir')
 }
 
-export default async () => {
+module.exports = async () => {
   linkDependencies()
 
   const packer = makePacker()
