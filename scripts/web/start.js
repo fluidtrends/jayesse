@@ -35,6 +35,9 @@ const linkDependencies = () => {
     const stack = process.env.CARMEL_STACK
 
     fs.symlinkSync(path.resolve(stackDir, 'node_modules'), depsDir, 'dir')
+
+    if (fs.existsSync(path.resolve(stackDir, 'node_modules', stack))) return
+
     fs.symlinkSync(path.resolve(stackDir, 'lib'), path.resolve(depsDir, stack), 'dir')
 }
 
