@@ -22,7 +22,6 @@ const styles = {
         justifyContent: "center",
         flexDirection: "column",
         backgroundColor: "#ECEFF1",
-        height: "100vh",
         overflow: "auto",  
         padding: 0,
         margin: 0
@@ -104,8 +103,12 @@ export const Guide: React.FC<GuideProps> = (props) => {
     )
 
     return (
-        <Affix offsetTop={0}>
-          { shown ? show() : hide() }
-        </Affix>
+        <div style={styles.app}>
+            { props.children }
+        </div>
 )}
 
+// return (
+//     <Affix offsetTop={0}>
+//       { shown ? show() : hide() }
+//     </Affix>

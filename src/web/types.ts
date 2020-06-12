@@ -10,6 +10,23 @@ export interface GuideStep {
     id: string
 }
 
+export interface NotFoundProps {
+    title: string 
+    subtitle: string
+}
+
+export interface CoverProps {
+    title: string 
+    subtitle: string
+}
+
+export interface HeaderProps {
+    items: MenuItemProps[]
+    inverted: boolean
+    current: string
+    cover: CoverProps
+}
+
 export interface MenuItemProps {
     name: string
     path: string
@@ -23,10 +40,12 @@ export interface GuideProps {
 export interface AppProps {
     name: string
     chunks: any
-    routes: any
+    routes: any[]
+    notfound: NotFoundProps
     [key: string]: any
 }
 
 export interface NavigatorProps {
-    [key: string]: any
+    routes: any[]
+    notfound: NotFoundProps
 }

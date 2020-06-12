@@ -16,6 +16,8 @@ const guide = {
     }]
 } as GuideProps
 
-ReactDOM.render(<Guide {...guide}>
-    <App { ...resolve('web') } />
-</Guide>, document.getElementById('app'))
+// ReactDOM.render(<Guide {...guide}>
+//     <App { ...resolve('web') } />
+// </Guide>, document.getElementById('app'))
+
+ReactDOM.render(<App { ...resolve('web') } />, document.getElementById('app'))
