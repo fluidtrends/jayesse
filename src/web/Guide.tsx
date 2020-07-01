@@ -2,9 +2,7 @@ import React, { useState, CSSProperties } from 'react'
 import { Button, Affix } from 'antd'
 import { Fade } from 'react-awesome-reveal'
 
-import {
-    GuideProps
-} from '.'
+import { GuideProps } from '../types'
 
 const text = {
 

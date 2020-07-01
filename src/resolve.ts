@@ -1,3 +1,5 @@
+import { withRouter } from 'react-router-dom'
+
 export default (target: string) => {
     const config: any = require('.carmel.json')
     let chunks: any = {}
@@ -10,7 +12,8 @@ export default (target: string) => {
         chunkRoutes = chunkRoutes.map((route: any) => Object.assign({}, route, {
             chunk: chunkId,
             id: `${chunkId}/${route.id}`,
-            component: require(`carmel/chunks/${chunkId}/screens/${route.screen}/${target}`).default
+            path: route.variant ? `${route.path}(/:${route.variant})*` : route.path,
+            component: withRouter(require(`carmel/chunks/${chunkId}/screens/${route.screen}/${target}`).default)
         }))
         
         routes = routes.concat(chunkRoutes)

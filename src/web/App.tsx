@@ -6,11 +6,8 @@ import {
     Route
 } from "react-router-dom"
 
-import {
-  NotFound,
-  AppProps,
-  Screen
-} from '.'
+import { Containers } from '.'
+import { AppProps } from '../types'
 
 /**
  * 
@@ -21,12 +18,12 @@ export const App: React.FC<AppProps> = (props) => {
     <Router>
       <Switch>
          { props.routes.map((route: any, i: number) => (
-            <Route exact key={`${route.id}`} path={route.path} render={navProps => (
-                <Screen {...navProps} {...props} {...route} />
-            )}/>
+            <Route strict sensitive exact={route.path === '/'} key={`${route.id}`} path={route.path}>
+                <Containers.Main {...props} {...route} />
+            </Route>
          ))}
          <Route key={`_notfound`} render={() => (
-            <NotFound {...props.notfound } />
+            <Containers.Info {...props.notfound } />
          )}/>
       </Switch>
   </Router>

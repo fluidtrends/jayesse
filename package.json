@@ -29,19 +29,26 @@
     "carmel.json"
   ],
   "dependencies": {
+    "@ant-design/icons-react": "^2.0.1",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "@types/react-responsive": "^8.0.2",
     "@types/react-router-dom": "^5.1.5",
+    "@types/react-syntax-highlighter": "^11.0.4",
     "antd": "^4.3.0",
     "axios": "^0.19.2",
     "history": "^4.10.1",
     "react": "^16.13.1",
     "react-awesome-reveal": "^2.4.2",
     "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
     "react-redux": "^7.2.0",
+    "react-responsive": "^8.1.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-syntax-highlighter": "^12.2.1",
     "redux": "^4.0.5",
+    "remark-shortcodes": "^0.3.1",
     "typed.js": "^2.0.11"
   },
   "devDependencies": {
