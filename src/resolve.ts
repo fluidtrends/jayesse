@@ -12,7 +12,7 @@ export default (target: string) => {
         chunkRoutes = chunkRoutes.map((route: any) => Object.assign({}, route, {
             chunk: chunkId,
             id: `${chunkId}/${route.id}`,
-            path: route.variant ? `${route.path}(/:${route.variant})*` : route.path,
+            resolvedPath: route.variant ? `${route.path}(/:${route.variant})*` : route.path,
             component: withRouter(require(`carmel/chunks/${chunkId}/screens/${route.screen}/${target}`).default)
         }))
         
