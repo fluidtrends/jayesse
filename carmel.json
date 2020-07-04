@@ -1,7 +1,10 @@
 {
     "name": "jayesse",
     "web": {
-        "entry": "src/web/main.tsx",
-        "template": "assets/web/page.ejs"
+        "entry": { 
+            "dom": "src/web/main/dom.tsx",
+            "static": "src/web/main/static.tsx"
+        },
+        "template": "assets/web/page.tmpl"
     }
 }
