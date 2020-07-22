@@ -59,7 +59,7 @@ export const Document = withRouter((props: any) => {
   return (
     <Layout style={{ width: "100%" }}>
         <MediaQuery minWidth={768}>
-            { sections ? <SideMenu selected={selected} items={sections} onSelect={onSelect}/> 
+            { sections ? <SideMenu {...props} selected={selected} items={sections} onSelect={onSelect}/> 
                               : <Skeleton loading={true} active paragraph={{ rows: 10 }} title />
             }
         </MediaQuery>

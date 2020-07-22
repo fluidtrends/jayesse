@@ -18,7 +18,7 @@ export const Main: FC <MainProps> = props => {
       ...styles.layouts.fullscreen 
       }} >
       <ConfigProvider>
-        <Header current={props.id} { ...props.header } cover={props.cover} inverted={scrollPosition > scrollTrigger} items={props.routes}/>
+        <Header {...props} current={props.id} { ...props.header } cover={props.cover} inverted={scrollPosition > scrollTrigger} items={props.routes}/>
         <Content style={styles.layouts.content}>
           <props.component {...props} style={styles.layouts.content}/>
         </Content>

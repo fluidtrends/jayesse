@@ -1,9 +1,8 @@
 import React from 'react'
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route
+   Switch,
+   Route
 } from "react-router-dom"
 
 import { Containers } from '.'
@@ -14,8 +13,8 @@ import { AppProps } from '../types'
  * @param props 
  */
 export const App: React.FC<AppProps> = (props) => {
+ 
   return (
-    <Router>
       <Switch>
          { props.routes.map((route: any, i: number) => (
             <Route strict sensitive exact={route.path === '/'} key={`${route.id}`} path={route.path}>
@@ -26,5 +25,4 @@ export const App: React.FC<AppProps> = (props) => {
             <Containers.Info {...props.notfound } />
          )}/>
       </Switch>
-  </Router>
 )}

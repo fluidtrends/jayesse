@@ -51,14 +51,13 @@ export const Header: React.FC<HeaderProps> = props => {
 
   const renderDrawer = () => (
     <Drawer
-          placement="left"
-          closable={true}
-          bodyStyle={styles.header.drawer}
-          onClose={toggleDrawer}
-          visible={drawerVisible}
-          key={"drawer"}
-        >
-           { props.items.map((item: any) => renderDrawerMenuItem(item)) }
+      placement="left"
+      closable={true}
+      bodyStyle={styles.header.drawer}
+      onClose={toggleDrawer}
+      visible={drawerVisible}
+      key={"drawer"}>
+          { props.items.map((item: any) => renderDrawerMenuItem(item)) }
     </Drawer>
   )
 
@@ -69,6 +68,8 @@ export const Header: React.FC<HeaderProps> = props => {
     </Button> : <div/>
   )
 
+  const logo = inverted ? props.assets.image('logo-inverted.png') : props.assets.images.logo
+  
   const render = () => (
     <Affix offsetTop={0} style={styles.header.top}>
       <div style={{ ...styles.header.header, ...(inverted && styles.header.headerInverted), ...(needsDepth && styles.header.headerDepth) }}>
@@ -78,7 +79,7 @@ export const Header: React.FC<HeaderProps> = props => {
             <MenuFoldOutlined />
           </Button>
         </MediaQuery>
-        <img src={`/assets/logo${inverted ? '-inverted' : ''}.png`} style={styles.header.logo}/>
+        <img src={logo} style={styles.header.logo}/>
           <MediaQuery maxWidth={768}>
             { renderAction() }
           </MediaQuery>
@@ -94,7 +95,7 @@ export const Header: React.FC<HeaderProps> = props => {
     </Affix> 
   )
   
-  return props.cover ? (<Cover {...props.cover}> 
+  return props.cover ? (<Cover {...props.cover} {...props} > 
     { render() } 
   </Cover>) : render()
 }

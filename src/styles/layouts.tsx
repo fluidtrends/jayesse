@@ -18,7 +18,6 @@ export const fullscreen: CSSProperties = {
 }
 
 export const cover: CSSProperties = {
-    backgroundImage: `url("assets/cover.r.png")`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '50% 50%',

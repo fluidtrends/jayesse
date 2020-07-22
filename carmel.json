@@ -3,7 +3,8 @@
     "web": {
         "entry": { 
             "dom": "src/web/main/dom.tsx",
-            "static": "src/web/main/static.tsx"
+            "static": "src/web/main/static.tsx",
+            "chunk": "src/web/main/chunk.tsx"
         },
         "template": "assets/web/page.tmpl"
     }

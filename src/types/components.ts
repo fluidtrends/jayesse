@@ -1,6 +1,11 @@
 import { ActionProps } from './main'
+import { ContainerProps } from './containers'
 
-export interface MenuItemProps {
+export interface ComponentProps extends ContainerProps {
+
+}
+
+export interface MenuItemProps extends ComponentProps {
     name: string
     path?: string
     file?: string
@@ -9,13 +14,13 @@ export interface MenuItemProps {
     items?: MenuItemProps[]
 }
 
-export interface CoverProps {
+export interface CoverProps extends ComponentProps  {
     title: string 
     subtitle: string
     action: ActionProps
 }
 
-export interface HeaderProps {
+export interface HeaderProps extends ComponentProps  {
     items: MenuItemProps[]
     inverted: boolean
     current: string
@@ -23,16 +28,16 @@ export interface HeaderProps {
     action?: ActionProps
 }
 
-export interface TextProps {
+export interface TextProps extends ComponentProps  {
     source?: string
 }
 
-export interface DocumentProps {
+export interface DocumentProps extends ComponentProps  {
     repo: string
     root: string
 }
 
-export interface MenuProps {
+export interface MenuProps extends ComponentProps  {
     items: MenuItemProps[],
     onSelect?: any
     selected: string

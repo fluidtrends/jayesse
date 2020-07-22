@@ -15,6 +15,7 @@ export const Cover: React.FC<CoverProps> = props => {
         <Content style={{
             ...styles.layouts.fullscreen, 
             ...styles.layouts.cover,
+            backgroundImage: `url(${props.assets.covers[props.image]})`
             }}>
           { props.children }
           <Content style={styles.layouts.overlay}>      
