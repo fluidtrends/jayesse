@@ -1,8 +1,5 @@
-export * from './types'
-export * from './Screen'
 export * from './App'
 export * from './Guide'
-export * from './NotFound'
-export * from './Header'
-export * from './Cover'
-export * as styles from './styles'
+
+export * as Components from './components'
+export * as Containers from './containers'

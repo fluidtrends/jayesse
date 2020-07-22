@@ -1,3 +1,7 @@
 import React from 'react';
-import { AppProps } from '.';
+import { AppProps } from '../types';
+/**
+ *
+ * @param props
+ */
 export declare const App: React.FC<AppProps>;
