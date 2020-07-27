@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.9.22",
+  "version": "1.10.2",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
@@ -26,6 +26,7 @@
     "scripts/**/**",
     "assets/**/*",
     "tsconfig.json",
+    "yarn.lock",
     "carmel.json"
   ],
   "dependencies": {
