@@ -1,5 +1,5 @@
 import React, { useState, CSSProperties } from 'react'
-import { Button, Affix } from 'antd'
+import { Button } from 'antd'
 import { Fade } from 'react-awesome-reveal'
 
 import { GuideProps } from '../types'

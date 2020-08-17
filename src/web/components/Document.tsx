@@ -4,13 +4,11 @@ import { useHistory, withRouter, useRouteMatch, useLocation, useParams } from "r
 import { Layout, Skeleton, Menu } from 'antd'
 import { Fade } from 'react-awesome-reveal'
 import ReactMarkdown from 'react-markdown'
-import { DocumentProps, MenuItemProps } from '../../types/components'
+import { MenuItemProps } from '../../types/components'
 import { SideMenu } from '.'
 import highlightStyle from "react-syntax-highlighter/dist/cjs/styles/prism/okaidia"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import MediaQuery from 'react-responsive'
-
-import * as styles from '../../styles'
 
 const CodeBlock: React.FC<{ language: string, value: string }> = props => {
     const { language, value } = props

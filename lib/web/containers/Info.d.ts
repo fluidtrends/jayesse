@@ -1,3 +1,3 @@
 import { FC } from 'react';
-import { InfoProps } from '../../types/containers';
-export declare const Info: FC<InfoProps>;
+import { ContainerProps } from '../../types/containers';
+export declare const Info: FC<ContainerProps>;

@@ -5,9 +5,13 @@ export const top = {
 } as CSSProperties
 
 export const logo = {
-    height: "48px",
+    height: 48,
     width: "auto",
     margin: 5
+} as CSSProperties
+
+export const logoLarge = {
+    height: 80
 } as CSSProperties
 
 export const menu = {
@@ -25,11 +29,18 @@ export const header = {
     justifyContent: "center",
     flexDirection: "row",
     width: "100%",
-    backgroundColor: `rgba(0,0,0, 0.5)`,
+    position: "absolute",
+    top: 0,
+    backgroundColor: `rgba(0,0,0,0)`,
     border: 'none',
+    height: 64,
     margin: 0,
     padding: 5
 } as CSSProperties
+
+export const headerLarge = {
+    height: 120
+}
 
 export const headerInverted = {
     backgroundColor: "#ffffff",
@@ -42,7 +53,10 @@ export const headerDepth = {
 export const menuItemIcon = {
     display: 'flex',
     flex: 1,
-    fontSize: 20,
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    height: "100%",
     color: "#ffffff",
 } as CSSProperties
 

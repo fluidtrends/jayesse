@@ -2,12 +2,12 @@ import React, { FC } from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { Layout } from 'antd'
 
-import { InfoProps } from '../../types/containers'
+import { ContainerProps } from '../../types/containers'
 import * as styles from '../../styles'
 
 const { Content } = Layout
 
-export const Info: FC <InfoProps> = props => {
+export const Info: FC <ContainerProps> = props => {
   return (
     <Fade style={{ width: "100%" }}>
       <Content style={styles.layouts.fullscreen}>

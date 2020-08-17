@@ -1,34 +1,47 @@
 import React, { FC } from 'react'
-import { Layout, ConfigProvider } from 'antd'
+import { Layout, Typography, ConfigProvider } from 'antd'
 
-import { MainProps } from '../../types/containers'
+import { ContainerProps } from '../../types/containers'
 import * as styles from '../../styles'
 import { Header } from '../components'
-import { useScroll } from '../../hooks'
 
 const { Footer, Content } = Layout
+const { Paragraph } = Typography
 
-export const Main: FC <MainProps> = props => {
+export const Main: FC <ContainerProps> = props => {
+
+  const hasHeader = true 
+  const hasContent = true 
   const hasFooter = props.footer !== undefined && props.footer
-  const scrollPosition = useScroll() 
-  const scrollTrigger = 5
+
+  const renderHeader = () => (
+    <Header {...props} current={props.id} { ...props.header } cover={props.cover} items={props.routes}/>
+  )
+
+  const renderContent = () => (
+    <Content style={styles.layouts.content}>
+      { props.children }
+    </Content>
+  )
+
+  const renderFooter = () => (
+    <Footer style={styles.layouts.footer}> 
+      <Paragraph>
+        { props.footer.watermark }
+      </Paragraph>
+    </Footer> 
+  )
 
   return ( 
-    <Layout style={{ 
-      ...styles.layouts.fullscreen 
-      }} >
-      <ConfigProvider>
-        <Header {...props} current={props.id} { ...props.header } cover={props.cover} inverted={scrollPosition > scrollTrigger} items={props.routes}/>
-        <Content style={styles.layouts.content}>
-          <props.component {...props} style={styles.layouts.content}/>
-        </Content>
-        { hasFooter && 
-          <Footer style={styles.layouts.footer}> 
-            { props.footer.watermark }
-          </Footer> 
-        }
-      </ConfigProvider>
-    </Layout>
+    <ConfigProvider>
+      <Layout style={{ 
+        ...styles.layouts.fullscreen 
+        }} >
+          { hasHeader && renderHeader() }
+          { hasContent && renderContent () }
+          { hasFooter && renderFooter() }
+      </Layout>
+    </ConfigProvider>
   )
 }
 

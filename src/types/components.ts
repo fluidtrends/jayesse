@@ -22,14 +22,9 @@ export interface CoverProps extends ComponentProps  {
 
 export interface HeaderProps extends ComponentProps  {
     items: MenuItemProps[]
-    inverted: boolean
     current: string
     cover?: CoverProps
     action?: ActionProps
-}
-
-export interface TextProps extends ComponentProps  {
-    source?: string
 }
 
 export interface DocumentProps extends ComponentProps  {
@@ -37,10 +32,22 @@ export interface DocumentProps extends ComponentProps  {
     root: string
 }
 
+export interface ArticleProps extends ComponentProps {
+    source: string
+}
+
+export interface SlideProps extends ComponentProps {
+    text: string
+    image: string
+    imageFirst: boolean
+}
+
+export interface SlideSetProps extends ComponentProps {
+    slides: SlideProps[]
+}
+
 export interface MenuProps extends ComponentProps  {
     items: MenuItemProps[],
     onSelect?: any
     selected: string
 }
-
-
