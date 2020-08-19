@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { useGitHubDocs } from '../../hooks'
-import { useHistory, withRouter, useRouteMatch, useLocation, useParams } from "react-router-dom"
+import { useHistory, withRouter, useLocation } from "react-router-dom"
 import { Layout, Skeleton, Menu } from 'antd'
 import { Fade } from 'react-awesome-reveal'
 import ReactMarkdown from 'react-markdown'

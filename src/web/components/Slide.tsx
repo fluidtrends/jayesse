@@ -2,15 +2,23 @@ import React from 'react'
 import { Layout, Button, } from 'antd'
 import { SlideProps, SlideSetProps } from '../../types/components'
 import { Text } from '../components'
+import { useHistory } from "react-router-dom"
 
 const { Content } = Layout
 
 export const Slide: React.FC<SlideProps> = props => {
   const { imageFirst, text, image, viewport, action, assets } = props
-  const { isSmall, isPortrait } = viewport
+  const { isSmall } = viewport
+  const history = useHistory()
+
   const layout = {
       backgroundColor: "#ffffff",
       ...props.layout 
+  }
+
+  const onMainAction = () => {
+    if (!action.link) return 
+     action.link.startsWith("http") ? window.location.replace(action.link!) : history.push(action.link)
   }
 
   const renderText = () => (
@@ -34,6 +42,7 @@ export const Slide: React.FC<SlideProps> = props => {
        <Button 
             type="primary"
             size="large" 
+            onClick={onMainAction}
             style={{ 
               minWidth: 300,
               margin: props.image && !props.viewport.isSmall ? "-20px 0 40px 40px" : "-20px 0 40px 0px"

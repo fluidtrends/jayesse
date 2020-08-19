@@ -46,6 +46,8 @@ export const App: React.FC<AppProps> = (props) => {
     </Cont>)
   }
 
+  console.log(">>", props)
+
   return (
       <Switch>
          { props.routes.map((route: any, i: number) => {

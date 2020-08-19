@@ -1,5 +1,5 @@
 export declare const logo = "logo.png";
-export declare const logoInverted = "logo-inverted.png";
+export declare const logoLight = "logo-light.png";
 export declare const allImages: any;
 export declare const allCovers: any;
 export declare const image: (base: string, locale: string, id: string) => string;

@@ -1,9 +1,9 @@
 import { assetPath, assetsPaths } from './base'
 
 export const logo = 'logo.png'
-export const logoInverted = 'logo-inverted.png'
+export const logoLight = 'logo-light.png'
 
-export const allImages: any = { logo, logoInverted }
+export const allImages: any = { logo, logoLight }
 export const allCovers: any = { main: 'main' }
 
 export const image = (base: string, locale: string, id: string) => assetPath(base, locale, id, `images`)
