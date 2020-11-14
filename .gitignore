@@ -3,6 +3,7 @@ node_modules
 .nyc_output
 *.log
 coverage
+yarn.lock
 build
 \.idea/
 dist
