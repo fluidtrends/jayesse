@@ -6,6 +6,7 @@ coverage
 yarn.lock
 build
 \.idea/
+pnpm-lock.yaml
 dist
 cc-test-reporter
 .test

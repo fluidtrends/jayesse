@@ -21,7 +21,7 @@ const CodeBlock: React.FC<{ language: string, value: string }> = props => {
 
 const { Content } = Layout
 
-export const Document = withRouter((props: any) => {
+export const Document: any = withRouter((props: any) => {
   const { repo, branch, root, mount } = props
     
   const history = useHistory()
