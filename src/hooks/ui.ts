@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BREAKPOINT_SMALL } from '../constants'
+import {isMobile} from 'react-device-detect'
 
 const SCROLL_TRIGGER = 5
 
@@ -24,9 +25,11 @@ export const useScroll = () => {
   
   export const useViewport = () => {
     const compute = () => {
+      const ua = window.navigator.userAgent
+
       const { innerWidth, innerHeight, devicePixelRatio } = window
       const isPortrait = (innerWidth < innerHeight)
-      const isSmall = (innerWidth <= BREAKPOINT_SMALL)
+      const isSmall = (innerWidth <= BREAKPOINT_SMALL && isMobile)
 
       const weight = isSmall && isPortrait ? devicePixelRatio : 1
       const baseFontSize = 14
@@ -45,6 +48,7 @@ export const useScroll = () => {
         width: innerWidth, 
         height: innerHeight,
         isPortrait,
+        isMobile,
         isSmall,
         fonts,
         scale: devicePixelRatio

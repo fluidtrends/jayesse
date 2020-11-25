@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.11.6",
+  "version": "1.11.8",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
@@ -45,6 +45,7 @@
     "marked": "^1.1.1",
     "react": "^16.13.1",
     "react-awesome-reveal": "^2.4.2",
+    "react-device-detect": "^1.14.0",
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
     "react-progressive-image": "^0.6.0",

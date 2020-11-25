@@ -12,7 +12,7 @@ const { Title } = Typography
 
 export const Cover: React.FC<CoverProps> = props => {
   const { title, image, assets, subtitle, action } = props
-  const { isSmall, scale, isPortrait } = useViewport()
+  const { isSmall, scale, isPortrait, isMobile } = useViewport()
   const history = useHistory()
 
   const { string, cover } = assets 
@@ -48,7 +48,8 @@ export const Cover: React.FC<CoverProps> = props => {
                               }}>
                                   { string(action.title) } 
                           </Button>
-                         
+                            { isSmall }
+                            { isMobile }
                         </Content>
                       </Content>
                   )}

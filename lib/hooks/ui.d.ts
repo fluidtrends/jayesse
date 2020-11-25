@@ -6,6 +6,7 @@ export declare const useViewport: () => {
     width: number;
     height: number;
     isPortrait: boolean;
+    isMobile: boolean;
     isSmall: boolean;
     fonts: {
         xxxl: number;
