@@ -114,6 +114,7 @@ export const Header: React.FC<HeaderProps> = props => {
                 size="large"
                 src={logo}
             />
+            
             { isSmall && isPortrait && renderAction() }
             { (isSmall && isPortrait) || renderMenuItems() }           
             { isSmall && isPortrait && renderDrawer() }

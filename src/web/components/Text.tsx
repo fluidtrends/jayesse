@@ -36,21 +36,27 @@ export const Text: React.FC<ArticleProps> = props => {
 
   const plugins = [require('remark-shortcodes')]
 
+  const renderMarkdown = () => {
+    if (!text) return (<Skeleton loading={true} active paragraph={{ rows: 10 }} title />)
+
+    return <ReactMarkdown 
+            source={text} 
+            renderers={renderers(props)}
+            plugins={plugins} />
+  }
   return (
     <Layout style={{ 
             width: "100%", 
             alignItems: "center",
             justifyContent: "center",
-            ...props.layout || {}
         }}>
         <Content style={{
-            backgroundColor: "#ffffff",
             color: props.theme.colors.text,
             padding: 40,
             ...props.layout || {},
         }}>
-            { text ? <ReactMarkdown source={text} renderers={renderers(props)} plugins={plugins} />
-                            : <Skeleton loading={true} active paragraph={{ rows: 10 }} title />
+            { 
+                renderMarkdown()
             }
         </Content>
     </Layout>

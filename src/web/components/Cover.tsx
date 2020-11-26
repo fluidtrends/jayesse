@@ -48,8 +48,6 @@ export const Cover: React.FC<CoverProps> = props => {
                               }}>
                                   { string(action.title) } 
                           </Button>
-                            { isSmall }
-                            { isMobile }
                         </Content>
                       </Content>
                   )}

@@ -12,7 +12,6 @@ export const Slide: React.FC<SlideProps> = props => {
   const history = useHistory()
 
   const layout = {
-      backgroundColor: "#ffffff",
       ...props.layout 
   }
 
@@ -34,6 +33,10 @@ export const Slide: React.FC<SlideProps> = props => {
       }}
       paragraph={{
         textAlign: props.image ? "left" : "center"
+      }}
+      layout={{
+        ...props.layout,
+        maxWidth:  props.image ? "60vw" : "90vw",
       }}
       style={{
         display: 'flex',
@@ -64,7 +67,6 @@ export const Slide: React.FC<SlideProps> = props => {
   return (
     <Layout style={{ 
             width: "100%", 
-            backgroundColor: "#fffff",
             alignItems: "center",
             padding: props.depth ? 20 : 0,
             justifyContent: "center"
@@ -76,7 +78,6 @@ export const Slide: React.FC<SlideProps> = props => {
             alignItems: "center",
             ...layout,
             width: "100%", 
-            padding: 40,
             flexDirection: props.viewport.isSmall ? 'column' : 'row'   
         }}>
             { (imageFirst || (isSmall)) && props.image && renderImage() }
