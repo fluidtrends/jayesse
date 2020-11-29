@@ -31,7 +31,7 @@ export const useScroll = () => {
       const isPortrait = (innerWidth < innerHeight)
       const isSmall = ua === "carmelmobile" || (innerWidth <= BREAKPOINT_SMALL && isMobile)
 
-      const weight = isSmall && isPortrait ? devicePixelRatio : 1
+      const weight = ua === "carmelmobile" ? 1 : (isSmall && isPortrait ? devicePixelRatio : 1)
       const baseFontSize = 14
 
       const fonts = {

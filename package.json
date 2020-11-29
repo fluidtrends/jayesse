@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.11.9",
+  "version": "1.11.10",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
