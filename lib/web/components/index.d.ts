@@ -6,3 +6,5 @@ export * from './Text';
 export * from './Slide';
 export * from './Auth';
 export * from './Game';
+export * from './Profile';
+export * from './Posts';

@@ -29,6 +29,6 @@ export interface GuideProps {
 export interface AppProps {
     name: string;
     chunks: any;
-    routes: any[];
+    routes: any;
     [key: string]: any;
 }

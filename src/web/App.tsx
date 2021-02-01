@@ -7,7 +7,7 @@ import {
 import { Containers, Components } from '.'
 import { AppProps, Containers as ContainersProps } from '../types'
 import { useViewport } from '../hooks'
-import { hooks } from '@carmel/js/src'
+import { hooks } from '@carmel/js'
 import * as globals from './Globals'
 import { Spin } from 'antd'
 import * as styles from '../styles'
