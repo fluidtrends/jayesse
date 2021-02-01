@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "@ant-design/icons-react": "^2.0.1",
-    "@carmel/js": "^1.0.2",
+    "@carmel/js": "^1.1.0",
     "@koale/useworker": "^3.2.1",
     "@types/qrcode.react": "^1.0.1",
     "@types/react": "^16.9.35",
