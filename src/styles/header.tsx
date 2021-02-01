@@ -106,6 +106,8 @@ export const menuItem = {
     fontWeight: 300,
     padding: 5,
     margin: 5,
+    border: "none",
+    backgroundColor: "transparent",
     marginBottom: 10,
     fontSize: 12
 } as CSSProperties

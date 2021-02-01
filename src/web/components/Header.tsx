@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Button, Affix, Drawer, Avatar } from 'antd'
+import { Button, Affix, Drawer, Avatar, Layout } from 'antd'
 import { MenuFoldOutlined, CloseOutlined } from "@ant-design/icons"
 import { useHistory } from "react-router-dom"
 import { HeaderProps, MenuItemProps } from '../../types/components'
 import { Cover } from '.'
 import * as styles from '../../styles'
 import { useScroll, useViewport } from '../../hooks'
+
+const { Content } = Layout
 
 export const Header: React.FC<HeaderProps> = props => {
   const viewport = useViewport()
@@ -29,16 +31,21 @@ export const Header: React.FC<HeaderProps> = props => {
   const inverted = scroll.isScrolled || props.cover === undefined
 
   const renderMenuItem = (item: MenuItemProps) => {
+    if (item.skipMenu) {
+      return <div/>
+    }
+
     return (
       props.current === item.id ? 
-        <p key={item.id} style={{ ...styles.header.menuItemCurrent, ...(inverted && styles.header.menuItemCurrentInverted)  }}> 
-          { item.name } 
+        <p key={item.id} style={{ ...styles.header.menuItemCurrent, ...(inverted && styles.header.menuItemCurrentInverted), ...(item.icon && { borderBottom: "0px solid #ffffff" })  }}> 
+            { item.icon ? <Avatar size={32} style={{ margin: 0, marginTop: -5, backgroundColor: "#ECEFF1", color: "#455A64" }} icon={<Icon name={item.icon}/>} /> : item.name }
         </p> :
-        <Button type="link" key={item.id} onClick={() => changePage(item) }
+        <Button key={item.id} onClick={() => changePage(item) }
                 style={{ ...styles.header.menuItem, ...(inverted && styles.header.menuItemInverted) }}>
-            { item.name }
+            { item.icon ? <Avatar size={32} style={{ margin: 0, backgroundColor: "#455A64" }} icon={<Icon name={item.icon}/>} /> : item.name }
         </Button>
-  )}
+      )
+  }
 
   const renderDrawerMenuItem = (item: MenuItemProps) => (
     <Button
@@ -107,7 +114,7 @@ export const Header: React.FC<HeaderProps> = props => {
         ...styles.header.header, 
         ...(inverted && styles.header.headerInverted), 
         ...(needsDepth && styles.header.headerDepth),
-        ...(isSmall && isPortrait && styles.header.headerLarge),
+        ...(isSmall && isPortrait && styles.header.headerLarge)
         }}>
           { isSmall && isPortrait && renderDrawerButton() }
              <Avatar
@@ -124,5 +131,12 @@ export const Header: React.FC<HeaderProps> = props => {
   
   return props.cover ? (<Cover {...props.cover} {...props}> 
     { render() } 
-  </Cover>) : render()
+  </Cover>) : 
+      <div style={{    
+            ...styles.layouts.base,
+            flex: 0,
+            marginTop: 30
+      }}>
+      { render() }
+  </div>
 }

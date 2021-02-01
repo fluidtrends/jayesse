@@ -20,6 +20,9 @@ export interface CoverProps extends ComponentProps  {
     action: ActionProps
 }
 
+export interface AuthProps extends ComponentProps  {
+}
+
 export interface HeaderProps extends ComponentProps  {
     items: MenuItemProps[]
     current: string
@@ -39,6 +42,7 @@ export interface ArticleProps extends ComponentProps {
 export interface SlideProps extends ComponentProps {
     text: string
     image: string
+    horizontal: boolean
     imageFirst: boolean
 }
 

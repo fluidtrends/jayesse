@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom"
 const { Content } = Layout
 
 export const Slide: React.FC<SlideProps> = props => {
-  const { imageFirst, text, image, viewport, action, assets } = props
+  const { imageFirst, horizontal, text, image, viewport, action, assets } = props
   const { isSmall } = viewport
   const history = useHistory()
 
@@ -78,7 +78,7 @@ export const Slide: React.FC<SlideProps> = props => {
             alignItems: "center",
             ...layout,
             width: "100%", 
-            flexDirection: props.viewport.isSmall ? 'column' : 'row'   
+            flexDirection: props.viewport.isSmall || horizontal ? 'column' : 'row'   
         }}>
             { (imageFirst || (isSmall)) && props.image && renderImage() }
             { renderText() }
@@ -95,6 +95,7 @@ export const SlideSet: React.FC<SlideSetProps> = props => {
       display: 'flex',
       justifyContent: "center",
       alignItems: "center",
+      width: "100%",
       flexDirection: "column"
   }}>
     { slides.map((slide: SlideProps) => (

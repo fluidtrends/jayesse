@@ -14,7 +14,7 @@ export const base: CSSProperties = {
 
 export const fullscreen: CSSProperties = {
     ...base,
-    minHeight: "100vh",
+    minHeight: "100vh"
 }
 
 export const cover: CSSProperties = {
@@ -39,7 +39,9 @@ export const content: CSSProperties = {
 
 export const footer = {
     textAlign: 'center', 
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#ffffff",
+    boxShadow: "0px 0px 2px #455A64",
 } as CSSProperties
 
 

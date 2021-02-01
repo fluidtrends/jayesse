@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom'
 import { StaticRouter, BrowserRouter } from "react-router-dom"
 
 import { App } from '..'
-import resolve from '../../resolve'
+import { resolveWeb } from '@carmel/js'
 import rawAssets from '../../assets'
 
 let basename = '/'
-const props = resolve('web')
+const props = resolveWeb()
 const locale = props.locale || 'en'
 
 const segments = window?.location?.pathname.split('/')

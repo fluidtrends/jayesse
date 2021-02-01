@@ -4,3 +4,5 @@ export * from './SideMenu';
 export * from './Document';
 export * from './Text';
 export * from './Slide';
+export * from './Auth';
+export * from './Game';

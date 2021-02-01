@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.11.10",
+  "version": "1.12.0",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
@@ -31,7 +31,9 @@
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "@ant-design/icons-react": "^2.0.1",
-    "@types/node": "^14.14.8",
+    "@carmel/js": "^1.0.2",
+    "@koale/useworker": "^3.2.1",
+    "@types/qrcode.react": "^1.0.1",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "@types/react-hamburger-menu": "^0.0.3",
@@ -39,10 +41,13 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/react-syntax-highlighter": "^11.0.4",
     "@types/styled-jsx": "^2.2.8",
+    "@types/workerpool": "^6.0.0",
     "antd": "^4.3.0",
-    "axios": "^0.19.2",
     "history": "^4.10.1",
+    "js-base64": "^3.6.0",
+    "libp2p-noise": "^2.0.3",
     "marked": "^1.1.1",
+    "qrcode.react": "^1.0.1",
     "react": "^16.13.1",
     "react-awesome-reveal": "^2.4.2",
     "react-device-detect": "^1.14.0",
@@ -54,11 +59,13 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-syntax-highlighter": "^12.2.1",
+    "react-webcam": "^5.2.2",
     "redux": "^4.0.5",
     "remark-shortcodes": "^0.3.1",
     "sanitize-html": "^1.27.2",
     "styled-jsx": "^3.3.0",
-    "typed.js": "^2.0.11"
+    "typed.js": "^2.0.11",
+    "workerpool": "^6.0.4"
   },
   "devDependencies": {
     "savor": "^1.3.0"
