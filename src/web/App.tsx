@@ -7,7 +7,7 @@ import {
 import { Containers, Components } from '.'
 import { AppProps, Containers as ContainersProps } from '../types'
 import { useViewport } from '../hooks'
-import { hooks } from '@carmel/js'
+import { hooks } from '@carmel/js/src'
 import * as globals from './Globals'
 import { Spin } from 'antd'
 import * as styles from '../styles'
@@ -22,7 +22,7 @@ export const App: React.FC<AppProps> = (props) => {
   const viewport = useViewport()
   const carmel = useCarmel(props)
 
-  const renderComponent = (component: any) => {
+  const renderComponent = (component: any, i: number) => {
     const Comp = "function" === (typeof component) ? component : Components[component.id as keyof typeof Components]
     const compProps = "function" === (typeof component) ? {} : component
 
@@ -36,7 +36,7 @@ export const App: React.FC<AppProps> = (props) => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center"
-    }}>
+    }} key={`${i}`}>
       <Comp {...props} carmel={carmel} viewport={viewport} {...compProps}/>
     </div>)
   }
@@ -46,7 +46,7 @@ export const App: React.FC<AppProps> = (props) => {
     const Cont = Containers[containerId] 
 
     return (<Cont {...props} {...route}>
-       { route.components.map((component: any) => renderComponent(component) )}
+       { route.components.map((component: any, i: number) => renderComponent(component, i) )}
     </Cont>)
   }
 
@@ -61,9 +61,11 @@ export const App: React.FC<AppProps> = (props) => {
 
      if (route.isPrivate && !carmel.account) {
         return <Redirect to={{ pathname: "/auth" }} />
-     }
+     } 
 
-     return  [<Container {...route} />, <style jsx global> { globals.styles({ viewport, theme: props.theme }) } </style>]
+     return  <div>
+      <Container key="container" {...route} />
+     </div>
   }
 
   return (
@@ -80,5 +82,8 @@ export const App: React.FC<AppProps> = (props) => {
          <Route key={`_notfound`} render={() => (
             <Containers.Info {...props.notfound } />
          )}/>
+
+         <style jsx global> { globals.styles({ viewport, theme: props.theme }) } </style>
+
       </Switch>
 )}

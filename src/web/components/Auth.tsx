@@ -17,6 +17,7 @@ const { Title, Paragraph, Text } = Typography
 export const Auth: any = (props: any) => {
   const { carmel, assets } = props
 
+  console.log(carmel)
   // const { isSmall, scale, isPortrait, isMobile } = useViewport()
   const [isWorking, setWorking] = useState(true)
   const [isReady, setReady] = useState(false)

@@ -98,8 +98,8 @@ export const SlideSet: React.FC<SlideSetProps> = props => {
       width: "100%",
       flexDirection: "column"
   }}>
-    { slides.map((slide: SlideProps) => (
-        <Slide {...slide} {...props}/>
+    { slides.map((slide: SlideProps, i: number) => (
+        <Slide key={`${i}`} {...slide} {...props}/>
     ))}
   </div>)
   }
