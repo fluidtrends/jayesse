@@ -1,6 +1,6 @@
 {
   "name": "jayesse",
-  "version": "1.12.3",
+  "version": "1.12.4",
   "description": "A JavaScript Stack",
   "scripts": {
     "test": "savor test",
@@ -31,12 +31,13 @@
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "@ant-design/icons-react": "^2.0.1",
-    "@carmel/js": "^1.1.0",
+    "@carmel/js": "^1.1.1",
     "@koale/useworker": "^3.2.1",
     "@types/qrcode.react": "^1.0.1",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "@types/react-hamburger-menu": "^0.0.3",
+    "@types/react-hot-loader": "^4.1.1",
     "@types/react-responsive": "^8.0.2",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-syntax-highlighter": "^11.0.4",
@@ -52,6 +53,7 @@
     "react-awesome-reveal": "^2.4.2",
     "react-device-detect": "^1.14.0",
     "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.13.0",
     "react-markdown": "^4.3.1",
     "react-progressive-image": "^0.6.0",
     "react-redux": "^7.2.0",

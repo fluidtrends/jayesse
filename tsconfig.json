@@ -6,6 +6,7 @@
       "jsx": "react",     
       "resolveJsonModule": false,
       "sourceMap": true,
+      "skipLibCheck": true,
       "allowJs": true,
       "noEmitHelpers": false,
       "declaration": true,         
