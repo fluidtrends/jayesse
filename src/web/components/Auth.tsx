@@ -1,71 +1,44 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 import { Fade } from 'react-awesome-reveal'
-import { Layout, Input, Avatar, ConfigProvider, Tag, Badge, Spin, Form, Alert, Typography, Button } from 'antd'
+import { Layout, Input, Avatar, Upload, Tag, Badge, Spin, Form, Alert, Typography, Button } from 'antd'
 import { AuthProps } from '../../types/components'
 import * as styles from '../../styles'
-// import ProgressiveImage from 'react-progressive-image'
-// import { useViewport } from '../../hooks'
 import { useHistory } from "react-router-dom"
-// import Webcam from "react-webcam"
-import { UserOutlined, EyeInvisibleOutlined, DownloadOutlined, EyeTwoTone, LockOutlined } from '@ant-design/icons'
-import QRCode from 'qrcode.react'
+import { UserOutlined, EyeInvisibleOutlined, UploadOutlined, EyeTwoTone, LockOutlined } from '@ant-design/icons'
 
 const { Content } = Layout
 const { Title, Paragraph, Text } = Typography
-// const { Search } = Input
 
 export const Auth: any = (props: any) => {
   const { carmel, assets } = props
-
-  console.log(carmel)
-  // const { isSmall, scale, isPortrait, isMobile } = useViewport()
   const [isWorking, setWorking] = useState(true)
   const [isReady, setReady] = useState(false)
   const [login, setLogin] = useState(false)
-  const [connected, setConnected] = useState(false)
-  // const [showCam, setShowCam] = useState(false)
   const [user, setUser] = useState<any>()
   const [username, setUsername] = useState<any>("")
-  const [saved, setSaved] = useState(false)
+  const [userDetails, setUserDetails] = useState<any>({})
+  const [password, setPassword] = useState<any>("")
   const [error, setError] = useState<any>("")
   const [info, setInfo] = useState<any>("")
-  // const webcamRef = useRef<any>(null)
-  // const webcamRef = useRef<any>(null)
   const usernameFieldRef = useRef<any>(null)
   const passwordFieldRef = useRef<any>(null)
 
   const history = useHistory()
-    
-  // const createNewKey = () => {    
-  //   // setWorking(true)
-  //   data.register("dan", "hello")
-  //   // const signatureString = JSON.stringify(key)
-  //   // const blob = new Blob([keypairString], { type: "text/plain;charset=utf-8" })
-  //   // saveAs(blob, "dan.carmel.sig")
-  // }
-
   const [form] = Form.useForm()
 
   useEffect(() => {
     if (carmel.account && !carmel.account.mnemonic) {
       history.push(props.onAuthRoute)
-      // location.reload()
       return
     }
-    // setUser(carmel.account)
+
     usernameFieldRef && usernameFieldRef.current && usernameFieldRef.current.focus()
     passwordFieldRef && passwordFieldRef.current && passwordFieldRef.current.focus()
   }, [])
 
-  // useEffect(() => {
-  //   if (!carmel.newIdentity) return
-  //   console.log("newIdentity", carmel.newIdentity)
-  // }, [carmel.newIdentity])
-
   useEffect(() => {
     if (!carmel.account) return
     setUser(carmel.account)
-    // history.push(props.onAuthRoute)
   }, [carmel.account])
 
   useEffect(() => {
@@ -82,74 +55,39 @@ export const Auth: any = (props: any) => {
         }
         break
       case EVENT.USER_LOOKUP_DONE:
-        if (!login) {
-            if (data.user) {
+          if (!data.login && data.did) {
               setError(`The username is already taken`)
-            } else {
-              setUsername(data.username)
-            }
-            setReady(true)
-            setWorking(false)
-            return
-        }
+          } else if (data.login && !data.did) {
+              setError(`The username does not exist`)
+          } else {
+            setUsername(data.username)
+            setUserDetails(data)
+          }
+        
+          setLogin(data.login)
+          setReady(true)
+          setWorking(false)
         break
       case EVENT.USER_CREATED:
           setUser(data.user)
           setReady(true)
           setWorking(false)
-            // console.log("!@@ DONE", props)
-            // history.push(props.onAuthRoute)
-            // location.reload()
         break
-      case EVENT.WORK_DONE:
-        console.log("done>>>>>>", data)
+      case EVENT.USER_LOGIN:
+          if (data.error) {
+            setError(data.error)
+            setUsername(data.username)
+            setLogin(true)
+            setPassword("")
+            setReady(true)
+            setWorking(false)
+            return 
+          }
+
+          showProfile()
         break
     }
   }, [carmel.newEvent])
-
-  // useEffect(() => {
-    // const { results, working } = data
-    // const { findUser } = results
-
-    // if (!findUser || findUser.working) return
-    
-    // if (findUser.login && findUser.result.available) {
-    //   setLogin(findUser.login)
-    //   setError(`The username ${findUser.username} is not on Carmel yet`)
-    //   usernameFieldRef && usernameFieldRef.current && usernameFieldRef.current.focus()
-    //   return 
-    // }
-
-    // if ((findUser.login && !findUser.result.available) || findUser.result.available) {
-    //   setLogin(findUser.login)
-    //   setUsername(findUser.username)
-    //   return 
-    // }
-
-    // setLogin(findUser.login)
-    // setError(`The username ${findUser.username} is already taken`)
-    // usernameFieldRef && usernameFieldRef.current && usernameFieldRef.current.focus()
-  // }, data.results.findUser)
-
-  // useEffect(() => {
-  //   const { results, working } = data
-  //   const { register } = results
-
-  //   if (!register || register.working || !register.result) return
-
-  //   setUser(register.result.user)
-  // }, data.results.register)
-
-  // useEffect(() => {
-  //   const { results, working } = data
-  //   const { login } = results
-    
-  //   if (!login || login.working || !login.result) return
-
-  //   console.log("USER!!!!", login.result.user)
-
-  //   setUser(login.result.user)
-  // }, data.results.login)
 
   const layout = {
     wrapperCol: { span: 24 }
@@ -163,14 +101,23 @@ export const Auth: any = (props: any) => {
     carmel.logout()
   }
 
+  const showProfile = () => {
+    setTimeout(() => {
+      history.push(props.onAuthRoute)
+      location.reload()
+    }, 500)
+  }
+
   const onDownload = () => {
-    carmel.saveMnemonicToFile(user.mnemonic)
-    history.push(props.onAuthRoute)
-    location.reload()
+    setWorking(true)
+    carmel.saveMnemonicToFile(user)
+    const t = setTimeout(() => {
+      showProfile()
+      clearTimeout(t)
+    }, 500)
   }
 
   const onFormChange = () => {
-    setError("")
     setError("")
   }
 
@@ -187,11 +134,28 @@ export const Auth: any = (props: any) => {
     </Form.Item>
   )
 
-  const renderPasswordField = () => (
-    <Form.Item key={"password"} name="password" style={{ width: "100%"}}>
+  const signatureUpload = (info: any) => {
+    const reader = new FileReader()
+    setWorking(true)
+
+    reader.onloadend = () => {
+      carmel.login({
+        ...userDetails,
+        username, 
+        password, 
+        signature: reader.result, 
+      })
+    }
+
+    info && reader.readAsText(info.file.originFileObj)
+  }
+
+  const renderPasswordField = () => {
+    return <Form.Item key={"password"} name="password" style={{ width: 400 }}>
         <Input.Password
             type={"password"}
             ref={passwordFieldRef}
+            onChange={onChangedPassword}
             style={{ 
               height: 64,
               opacity: 1.0
@@ -199,8 +163,8 @@ export const Auth: any = (props: any) => {
             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             placeholder={ login ? 'Enter your Carmel password' : 'Choose a password' } 
             prefix={<LockOutlined style={{ marginLeft: 5 }} />}/>
-    </Form.Item>
-  )
+        </Form.Item>
+    }
 
   const renderFields = () => {
     return [username ? renderPasswordField() : renderUsernameField()]
@@ -211,10 +175,12 @@ export const Auth: any = (props: any) => {
   }
 
   const onLogin = () => {
+    setUsername("")
     setLogin(true)
   }
 
   const onRegister = () => {
+    setUsername("")
     setLogin(false)
   }
 
@@ -227,7 +193,7 @@ export const Auth: any = (props: any) => {
     if (!username) {
       setInfo(`Checking if username is available ...`)
       setWorking(true)
-      carmel.session.findUser(v.username, login)
+      carmel.findUser(v.username, login)
       return
     }
 
@@ -236,16 +202,34 @@ export const Auth: any = (props: any) => {
       return 
     }
 
-    setInfo(login ? `Signing you back into your Carmel Account ...`: `Creating your Carmel Account ...`)
+    setInfo(`Creating your Carmel Account ...`)
     setWorking(true)
-    login ? carmel.login(username, v.password) : carmel.register(username, v.password)
+    carmel.register(username, v.password)
+  }
+
+  const onChangedPassword = (e: any) => {
+    setPassword(e.target.value)
   }
 
   const renderError = () => {
     return <Alert message={error} type="error" />
   }
 
+  const validPassword = () => {
+    return password && password.length > 1
+  }
+
   const renderAction = () => {
+    if (login && username) {
+      return <Form.Item key={"signature"} name="signature" style={{ width: 400, textAlign: "center" }}>
+              <Upload disabled={!validPassword()} onChange={signatureUpload}>
+                <Button disabled={!validPassword()} type="primary" icon={<UploadOutlined />} size="large">
+                      Import Your Signature To Sign In 
+                </Button>
+              </Upload>
+        </Form.Item>
+    }
+
     return (<Form.Item {...tailLayout} style={{ paddingTop: 20}}>  
         <Button disabled={false} type="primary" size="large" htmlType="submit" style={{
           opacity: 1.0
@@ -319,7 +303,7 @@ export const Auth: any = (props: any) => {
     </div>
   }
 
-  const renderForm = () => {
+  const renderForm = () => {    
     return <Form.Provider onFormChange={onFormChange}>
         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} style={{
           boxShadow: "0px 0px 8px #999999",

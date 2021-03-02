@@ -1,8 +1,10 @@
-export const styles = (props: any) => {
+import { createGlobalStyle } from 'styled-components'
+
+export const styles: any = (props: any) => {
     const { fonts } = props.viewport
     const { colors } = props.theme
 
-    return `
+    return createGlobalStyle`
       h1, h1.ant-typography {
         font-size: ${fonts.xxxl}px;
         color: ${colors.text};

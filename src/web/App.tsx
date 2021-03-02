@@ -1,89 +1,23 @@
 import React from 'react'
-import {
-   Switch,
-   Redirect,
-   Route
-} from "react-router-dom"
-import { Containers, Components } from '.'
-import { AppProps, Containers as ContainersProps } from '../types'
-import { useViewport } from '../hooks'
-import { hooks } from '@carmel/js/src'
-import * as globals from './Globals'
-import { Spin } from 'antd'
-import * as styles from '../styles'
+import { AppProps } from '../types'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
+import { Router } from './Router'
 
-const { useCarmel } = hooks
+import { containers, components } from '.'
 
 /**
  * 
  * @param props 
  */
-export const App: React.FC<AppProps> = (props) => {  
-  const viewport = useViewport()
-  const carmel = useCarmel(props)
-
-  const renderComponent = (component: any, i: number) => {
-    const Comp = "function" === (typeof component) ? component : Components[component.id as keyof typeof Components]
-    const compProps = "function" === (typeof component) ? {} : component
-
-    return (<div style={{
-      backgroundColor: "#ffffff",
-      width: "100%",
-      margin: 0,
-      padding: 0,
-      display: "flex",
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center"
-    }} key={`${i}`}>
-      <Comp {...props} carmel={carmel} viewport={viewport} {...compProps}/>
-    </div>)
-  }
-
-  const Container = (route: any) => {
-    const containerId: keyof typeof Containers = (route.type || "main").charAt(0).toUpperCase() + (route.type || "main").toLowerCase().substring(1)
-    const Cont = Containers[containerId] 
-
-    return (<Cont {...props} {...route}>
-       { route.components.map((component: any, i: number) => renderComponent(component, i) )}
-    </Cont>)
-  }
-
-  const renderRoute = (route: any) => {
-     if (!carmel.ready) {
-        return <div style={{
-           ...styles.layouts.fullscreen
-        }}>
-           <Spin/>
-        </div>
-     }
-
-     if (route.isPrivate && !carmel.account) {
-        return <Redirect to={{ pathname: "/auth" }} />
-     } 
-
-     return  <div>
-      <Container key="container" {...route} />
-     </div>
-  }
+export const App: React.FC<AppProps> = (props) => { 
+  const { store, persistor } = props 
 
   return (
-      <Switch>
-         { props.routes.all.map((route: any, i: number) => (<Route 
-                        strict 
-                        sensitive 
-                        exact={route.path === '/'} 
-                        key={`${route.id}`} 
-                        render={props => renderRoute(route)}
-                        path={route.path}/>))
-         }
-
-         <Route key={`_notfound`} render={() => (
-            <Containers.Info {...props.notfound } />
-         )}/>
-
-         <style jsx global> { globals.styles({ viewport, theme: props.theme }) } </style>
-
-      </Switch>
-)}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+          <Router {...props} />
+      </PersistGate>
+    </Provider>
+  )
+}

@@ -4,11 +4,11 @@ import { Layout, Typography, Button } from 'antd'
 import { CoverProps } from '../../types/components'
 import * as styles from '../../styles'
 import ProgressiveImage from 'react-progressive-image'
-import { useViewport } from '../../hooks'
 import { useHistory } from "react-router-dom"
+import { hooks } from '@carmel/js/src'
 
 const { Content } = Layout
-const { Title } = Typography
+const { useScroll, useViewport } = hooks 
 
 export const Cover: React.FC<CoverProps> = props => {
   const { title, image, assets, subtitle, action } = props

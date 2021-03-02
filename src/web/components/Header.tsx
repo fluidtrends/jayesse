@@ -5,9 +5,10 @@ import { useHistory } from "react-router-dom"
 import { HeaderProps, MenuItemProps } from '../../types/components'
 import { Cover } from '.'
 import * as styles from '../../styles'
-import { useScroll, useViewport } from '../../hooks'
+import { hooks } from '@carmel/js/src'
 
 const { Content } = Layout
+const { useScroll, useViewport } = hooks 
 
 export const Header: React.FC<HeaderProps> = props => {
   const viewport = useViewport()
@@ -30,24 +31,24 @@ export const Header: React.FC<HeaderProps> = props => {
   const needsDepth = scroll.isScrolled
   const inverted = scroll.isScrolled || props.cover === undefined
 
-  const renderMenuItem = (item: MenuItemProps) => {
+  const renderMenuItem = (item: MenuItemProps, i: number) => {
     if (item.skipMenu) {
-      return <div/>
+      return <div key={`${i}`}/>
     }
 
     return (
       props.current === item.id ? 
-        <p key={item.id} style={{ ...styles.header.menuItemCurrent, ...(inverted && styles.header.menuItemCurrentInverted), ...(item.icon && { borderBottom: "0px solid #ffffff" })  }}> 
+        <p key={`${i}`} style={{ ...styles.header.menuItemCurrent, ...(inverted && styles.header.menuItemCurrentInverted), ...(item.icon && { borderBottom: "0px solid #ffffff" })  }}> 
             { item.icon ? <Avatar size={32} style={{ margin: 0, marginTop: -5, backgroundColor: "#ECEFF1", color: "#455A64" }} icon={<Icon name={item.icon}/>} /> : item.name }
         </p> :
-        <Button key={item.id} onClick={() => changePage(item) }
+        <Button key={`${i}`} onClick={() => changePage(item) }
                 style={{ ...styles.header.menuItem, ...(inverted && styles.header.menuItemInverted) }}>
             { item.icon ? <Avatar size={32} style={{ margin: 0, backgroundColor: "#455A64" }} icon={<Icon name={item.icon}/>} /> : item.name }
         </Button>
       )
   }
 
-  const renderDrawerMenuItem = (item: MenuItemProps) => (
+  const renderDrawerMenuItem = (item: MenuItemProps, i: number) => (
     <Button
       onClick={() => props.current === item.id || changePage(item)}
       size="large"
@@ -74,7 +75,7 @@ export const Header: React.FC<HeaderProps> = props => {
       visible={drawerVisible}
       width="50vw"
       key={"drawer"}>
-          { props.items.map((item: any) => renderDrawerMenuItem(item)) }
+          { props.items.map((item: any, i: number) => renderDrawerMenuItem(item, i)) }
     </Drawer>
   )
 
@@ -102,8 +103,8 @@ export const Header: React.FC<HeaderProps> = props => {
 
   const renderMenuItems = () => {
     return (
-      <div style={ styles.header.menu }>
-        { props.items.map((item: any) => renderMenuItem(item)) }
+      <div key="items" style={ styles.header.menu }>
+        { props.items.map((item: any, i: number) => renderMenuItem(item, i)) }
       </div>
     )
   }
