@@ -3,10 +3,8 @@ import { render } from 'react-dom'
 import { resolveComponent } from './resolve'
 import { StaticRouter, BrowserRouter } from "react-router-dom"
 import { App } from '..'
-import { resolveWeb } from '@carmel/js'
+import { resolveWeb } from '@carmel/js/src'
 import rawAssets from '../../assets'
-
-process.env.DEBUG="carmel*"
 
 export const renderComponent = (component: any, i: number, route: any, session: any) : any => {
     const Component = resolveComponent(component, route, session)
@@ -36,35 +34,32 @@ export const renderComponent = (component: any, i: number, route: any, session: 
 //     </StaticRouter>
 // }
 
-// export const renderApp = (isStatic: boolean = false) => {
-//     let basename = '/'
+export const renderApp = (isStatic: boolean = false) => {
+    process.env.DEBUG="carmel*"
 
-//     if (isStatic) {
-//         const segments = window?.location?.pathname.split('/')
+    let basename = '/'
 
-//         if (segments && segments.length > 3 && ['ipfs', 'ipns'].includes(segments[1])) {
-//             basename = `/${segments[1]}/${segments[2]}/`
-//         }
-//     }
+    if (isStatic) {
+        const segments = window?.location?.pathname.split('/')
 
-//     const props = resolveWeb()
-//     const locale = props.locale || 'en'
-//     const assets = rawAssets(basename, locale)
+        if (segments && segments.length > 3 && ['ipfs', 'ipns'].includes(segments[1])) {
+            basename = `/${segments[1]}/${segments[2]}/`
+        }
+    }
 
-//     const App = (<BrowserRouter basename={basename}>
-//         <Main {...props} basename={basename} assets={assets}/>
-//     </BrowserRouter>)
-
-//     return { props, locale, assets, App }
-// }
-
-export const renderApp = () => {
-    const basename = '/'
     const props = resolveWeb()
     const locale = props.locale || 'en'
     const assets = rawAssets(basename, locale)
 
-    return <BrowserRouter basename={basename}>
-        <App {...props} basename={basename} assets={assets}/>
-    </BrowserRouter>
+    // const app = (<BrowserRouter basename={basename}>
+    //     <App {...props} basename={basename} assets={assets}/>
+    // </BrowserRouter>)
+
+    const app = <App {...props} basename={basename} assets={assets}/>
+
+    // const site = <StaticRouter location={basename}>
+    //      <App { ...props } basename={basename} assets={assets} />
+    // </StaticRouter>
+
+    return { app, props, locale, assets }
 }

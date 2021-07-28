@@ -20,7 +20,7 @@ export const styles: any = (props: any) => {
         color: ${colors.text};
       }
 
-      h3, h4.ant-typography {
+      h4, h4.ant-typography {
         font-size: ${fonts.l}px;
         color: ${colors.text};
       }

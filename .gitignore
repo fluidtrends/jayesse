@@ -10,3 +10,4 @@ pnpm-lock.yaml
 dist
 cc-test-reporter
 .test
+package-lock.json

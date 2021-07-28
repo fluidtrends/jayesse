@@ -6,5 +6,8 @@ declare const _default: (base: string, locale?: string) => {
     strings: any;
     string: (id: string) => any;
     text: (id: string) => any;
+    authors: any;
+    posts: any;
+    post: (id: string) => any;
 };
 export default _default;

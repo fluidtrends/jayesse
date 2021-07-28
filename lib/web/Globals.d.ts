@@ -1,1 +1,1 @@
-export declare const styles: (props: any) => string;
+export declare const styles: any;

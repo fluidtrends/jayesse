@@ -1,51 +1,23 @@
-import React, { useRef, useEffect, createContext, useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import * as styles from '../../styles'
-import { Layout, Menu, Dropdown, Switch, Typography, PageHeader, Empty, Button, Skeleton, Input, Form, Spin, Tag, Badge, Divider, List, Avatar, Space  } from 'antd'
-import {
-  ArrowLeftOutlined,
-  UploadOutlined,
-  DownOutlined,
-  LikeOutlined,
-  MessageOutlined,
-  UserOutlined,
-  CloseOutlined, 
-  CheckOutlined, 
-  AppstoreOutlined,
-  NotificationOutlined
-} from '@ant-design/icons'
-import { useHistory } from "react-router-dom"
-import { EditorState } from "draft-js"
-import ReactQuill from 'react-quill'
+import { Typography, PageHeader, Spin, Empty, Button, List  } from 'antd'
 
-const { Header, Content, Footer, Sider } = Layout
-const { SubMenu } = Menu
 const { Title, Text } = Typography
 
 export const DataList: any = ({ data, title }: any) => {
     const [isWorking, setWorking] = useState(false)
     const { list } = data
     
-    // const Icon = (props: any) => {
-    //   const Comp = require(`@ant-design/icons`)[props.name]
-    //   return <Comp/>
-    // }
-    
     const onEditItem = (p: any) => {
       data.list.select(p.id)
-      // setPost(p)
-      // form.setFieldsValue({ headline: p.title })
-      // setShowEditor(true)
     }
 
     const onDeleteItem = (p: any) => {
       data.list.delete(p.id)
-      //  await data.posts.removeRow(p.id)
-      //  setPosts(data.posts.rows)
     }
 
     const onCreateItem = () => {
       data.list.add()
-      // data.startEditing()
     }
 
     const renderMenu = () => {
@@ -73,6 +45,13 @@ export const DataList: any = ({ data, title }: any) => {
 
     const renderProgress = () => {
       return <Spin style={{ marginTop: 10 }}/>
+    }
+
+    const renderItemTags = (tags: string[]) => {
+            // {/* <Tag style={{ width: 60, textAlign: "center" }} color={ item.status.toUpperCase() === 'DRAFT' ? 'warning' : 'success' }> 
+            //             { item.status.toUpperCase() } 
+            //   </Tag>  */}
+        return <div/>
     }
 
     const renderList = () => {  
@@ -117,9 +96,7 @@ export const DataList: any = ({ data, title }: any) => {
                 <List.Item.Meta
                   title={<a href={item.href}> {item.title} </a>}
                 />
-                {/* <Tag style={{ width: 60, textAlign: "center" }} color={ item.status.toUpperCase() === 'DRAFT' ? 'warning' : 'success' }> 
-                        { item.status.toUpperCase() } 
-                </Tag>  */}
+                { renderItemTags (item) }
               </List.Item>
             )}
           />

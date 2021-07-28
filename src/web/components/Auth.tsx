@@ -10,7 +10,7 @@ const { Content } = Layout
 const { Title, Paragraph, Text } = Typography
 
 export const Auth: any = (props: any) => {
-  const { carmel, assets } = props
+  const { carmel, account, assets } = props
   const [isWorking, setWorking] = useState(true)
   const [isReady, setReady] = useState(false)
   const [login, setLogin] = useState(false)
@@ -27,7 +27,7 @@ export const Auth: any = (props: any) => {
   const [form] = Form.useForm()
 
   useEffect(() => {
-    if (carmel.account && !carmel.account.mnemonic) {
+    if (account && !account.mnemonic) {
       history.push(props.onAuthRoute)
       return
     }
@@ -37,9 +37,9 @@ export const Auth: any = (props: any) => {
   }, [])
 
   useEffect(() => {
-    if (!carmel.account) return
-    setUser(carmel.account)
-  }, [carmel.account])
+    if (!account) return
+    setUser(account)
+  }, [account])
 
   useEffect(() => {
     if (!carmel.newEvent) return

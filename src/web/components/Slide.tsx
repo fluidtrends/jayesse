@@ -20,6 +20,19 @@ export const Slide: React.FC<SlideProps> = props => {
      action.link.startsWith("http") ? window.location.replace(action.link!) : history.push(action.link)
   }
 
+  const renderAction = () => (
+    <Button 
+    type="primary"
+    size="large" 
+    onClick={onMainAction}
+    style={{ 
+      minWidth: 300,
+      margin: props.image && !props.viewport.isSmall ? "-20px 0 40px 40px" : "-20px 0 40px 0px"
+    }}>
+      { assets.string(action.label) }
+    </Button>
+  )
+
   const renderText = () => (
     <div style={{
       display: "flex",
@@ -42,16 +55,7 @@ export const Slide: React.FC<SlideProps> = props => {
         display: 'flex',
         flex: 1  
       }}/>
-       <Button 
-            type="primary"
-            size="large" 
-            onClick={onMainAction}
-            style={{ 
-              minWidth: 300,
-              margin: props.image && !props.viewport.isSmall ? "-20px 0 40px 40px" : "-20px 0 40px 0px"
-            }}>
-            { assets.string(action.label) }
-      </Button>
+        { props.action && renderAction() }
     </div>
   )
 

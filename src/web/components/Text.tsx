@@ -31,7 +31,7 @@ const renderers = (styles: any) => ({
 const { Content } = Layout
 
 export const Text: React.FC<ArticleProps> = props => {
-  const { source, assets } = props
+  const { source, assets, isPost } = props
   const text = useText(assets.text(source))
 
   const plugins = [require('remark-shortcodes')]
@@ -48,12 +48,16 @@ export const Text: React.FC<ArticleProps> = props => {
     <Layout style={{ 
             width: "100%", 
             alignItems: "center",
+            backgroundColor:  "#ffffff",
             justifyContent: "center",
         }}>
         <Content style={{
             color: props.theme.colors.text,
-            padding: 40,
-            ...props.layout || {},
+            padding: isPost ? 10 : 40,
+            marginTop: isPost ? 20 : 0,
+            backgroundColor: "#ffffff",
+            width: "100%", 
+            ...props.layout || {}
         }}>
             { 
                 renderMarkdown()

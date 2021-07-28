@@ -1,2 +1,2 @@
-declare const _default: (options?: any) => void;
+declare const _default: (options: any) => string;
 export default _default;

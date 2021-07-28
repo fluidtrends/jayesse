@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, createContext, useState, useCallback } from 'react'
 import * as styles from '../../styles'
-import { Layout, Menu, Dropdown, Switch, Typography, PageHeader, Empty, Button, Skeleton, Input, Form, Spin, Tag, Badge, Divider, List, Avatar, Space  } from 'antd'
+import { Layout, Menu, Upload, Card, Typography, PageHeader, Empty, Button, Skeleton, Input, Form, Spin, Tag, Badge, Divider, List, Avatar, Space  } from 'antd'
 import {
   ArrowLeftOutlined,
   UploadOutlined,
   DownOutlined,
   LikeOutlined,
   MessageOutlined,
-  UserOutlined,
+  InboxOutlined,
   CloseOutlined, 
   CheckOutlined, 
   AppstoreOutlined,
@@ -15,32 +15,24 @@ import {
 } from '@ant-design/icons'
 import { useHistory } from "react-router-dom"
 import { EditorState } from "draft-js"
-import ReactQuill from 'react-quill'
+// import ReactQuill from 'react-quill'
 
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
 const { Title, Text } = Typography
+const { Dragger } = Upload
+const { Meta } = Card 
 
 export const PostEditor: any = ({ data }: any) => {
-    const [value, setValue] = useState('')
-    const [post, setPost] = useState(data.list.selection())
-
-    // const [content, setContent] = useState('')
-    // // const [post, setPost] = useState<any>(data.posts.current)
-    // const [newPostId, setNewPostId] = useState<any>()
-    // const [postContent, setPostContent] = useState<any>('')
-    // // const [showEditor, setShowEditor] = useState(data.posts.current)
-    // const [editorState, setEditorState] =  useState(EditorState.createEmpty())
-    // const [isWorking, setWorking] = useState(false)
-    // const [section, setSection] = useState("profile")
-    // const [saveTimer, setSaveTimer] = useState<any>()
-
+    const post = data.list.selection()
+    const [cover, setCover] = useState<any>(post.cover)
     const headline = useRef<any>(null)
-
-    // const history = useHistory()
     const [form] = Form.useForm()
-    // const [posts, setPosts] = useState<any>([])
-    
+    const [files, setFiles] = useState([])
+
+    console.log("post:", post)
+    // console.log("state:", data.state)
+
     const Icon = (props: any) => {
       const Comp = require(`@ant-design/icons`)[props.name]
       return <Comp/>
@@ -54,60 +46,39 @@ export const PostEditor: any = ({ data }: any) => {
       wrapperCol: {  span: 24 }
     }
      
-    const onChange = (e: any) => {
-      setValue(e)
+    const onEditBody = (e: any) => {
+      data.list.updateBlob(post.id, "body", e)
     }
 
-    const save = async (status: string = "live") => {
-      // const title =  form.getFieldValue('headline')
-      // const timestamp = Date.now()
+    const saveDraft = () => {
+    //   const title =  form.getFieldValue('headline')
+    //   const timestamp = Date.now()
 
-      // const { cid, size } = await carmel.session.node.push('posts_current', {
-      //   body: value,
-      //   timestamp,
-      //   status,
-      //   title
-      // })
+    //   const snapshot = {
+    //       body,
+    //       timestamp,
+    //       title
+    //   }
+
+    //   console.log(snapshot)
+        data.list.push(post.id, { draft: true })
+
+      // const { cid, size } = await carmel.session.node.push('posts_current', snapshot)
 
       // await data.posts.updateRow(newPostId, ({ title, cid, size, timestamp, status }))
     }
 
     const publish = () => {
-
+        data.list.push(post.id, { draft: false })
     }
 
     const onEditHeader = (e: any) => {
         data.list.update(post.id, { title: e.target.value })
     }
 
-    const onEditPost = (p: any) => {
-      // setPost(p)
-      // form.setFieldsValue({ headline: p.title })
-      // setShowEditor(true)
-    }
-
-    const onDeletePost = (p: any) => {
-      //  await data.posts.removeRow(p.id)
-      //  setPosts(data.posts.rows)
-    }
-
     const onBackToPosts = () => {
-      // if (!form.getFieldValue('headline')) {
-        // await data.posts.removeRow(newPostId)
-      // } else {
-        // await save()
-      // }
-
-      // setPost('')
-      // setPostContent('')
-      // setNewPostId('')
-      // form.setFieldsValue({ headline: '' })
-      // setPosts(data.posts.rows)
-
       form.resetFields()
       data.list.deselect()
-    //   setShowEditor(false)
-    //   data.posts.stopEditing()
     }
 
     const onFinish = (v: any) => {
@@ -125,7 +96,7 @@ export const PostEditor: any = ({ data }: any) => {
             marginBottom: 20
           }}
           extra={[
-            <a key="save" onClick={() => save('draft')}>
+            <a key="save" onClick={saveDraft}>
               { 'Save Draft' }
             </a>,
             <Button style={{
@@ -153,6 +124,55 @@ export const PostEditor: any = ({ data }: any) => {
       </Form.Item>
     }
 
+    const imageToBase64 = async (file: any) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = () => resolve(reader.result)
+          reader.onerror = error => reject(error)
+        })
+    }
+
+    const onCoverUpload = async ({ onSuccess, file }: any) => {
+        const imageData = await imageToBase64(file)
+        data.list.updateBlob(post.id, "cover", imageData, "image")
+        setCover(imageData)
+        onSuccess(true)
+    }
+
+    const renderCoverImage = () => {
+        if (!cover) {
+            return <div/>
+        }
+
+        return <img alt="cover" width="100%" src={cover}/>
+    }
+
+    const renderCoverField = () => {
+        return <Form.Item key={"cover"} name="cover"
+                style={{ width: "100%"}}>
+                     <Dragger 
+                     accept="image/*"
+                     showUploadList={false}
+                     customRequest={onCoverUpload}
+                     style={{
+                        border: "none", backgroundColor: "#f5f5f5"
+                     }}>
+                         <Card
+                            hoverable
+                            style={{ width: "100%" }}
+                            cover={renderCoverImage()}>
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p>
+                                Click or drag to edit the cover image
+                            </p>
+                        </Card>
+                    </Dragger>
+        </Form.Item>
+      }
+
     const modules = {
       toolbar: [
         [{ 'header': [1, 2, false] }],
@@ -171,27 +191,28 @@ export const PostEditor: any = ({ data }: any) => {
     ]
 
     const renderEditor = () => {
-      return (<div style={{
-        width: "100%",
-        backgroundColor: "#ffffff",
-        height: "70vh",
-        padding: 0,
-        margin: 0,
-        overflowY: "scroll"
-      }}>
-          <ReactQuill
-            style={{
-            width: "100%",
-            backgroundColor: "#ffffff",       
-            paddingBottom: 42,         
-            height: "100%"
-            }}
-            formats={formats}
-            modules={modules}
-            value={value}
-            onChange={onChange}
-        />
-      </div>)
+      return <div/>
+      // return (<div style={{
+      //   width: "100%",
+      //   backgroundColor: "#ffffff",
+      //   height: "70vh",
+      //   padding: 0,
+      //   margin: 0,
+      //   overflowY: "scroll"
+      // }}>
+      //     <ReactQuill
+      //       style={{
+      //       width: "100%",
+      //       backgroundColor: "#ffffff",       
+      //       paddingBottom: 42,         
+      //       height: "100%"
+      //       }}
+      //       formats={formats}
+      //       modules={modules}
+      //       value={post.body || ""}
+      //       onChange={onEditBody}
+      //   />
+      // </div>)
     }
 
     const renderCompose = () => {    
@@ -206,6 +227,7 @@ export const PostEditor: any = ({ data }: any) => {
             padding: 0,
             margin: 0
           }}>
+            { renderCoverField () }
             { renderHeadlineField() }
             { renderEditor() }
           </Form>

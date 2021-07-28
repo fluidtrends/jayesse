@@ -1,9 +1,10 @@
 import { image, images, cover, covers } from './images'
-import { strings, text } from './text'
+import { strings, text, post, posts, authors } from './text'
 
 let _cache: any = {
     strings: {},
-    text: {}
+    text: {},
+    posts: {}
 }
 
 export default (base: string, locale: string = "en") => {
@@ -19,6 +20,12 @@ export default (base: string, locale: string = "en") => {
         text: (id: string) => {
             _cache.text[id] = _cache.text[id] || text(base, locale, id)
             return _cache.text[id]            
+        },
+        authors: authors(base, locale),
+        posts: posts(base, locale),
+        post: (id: string) => {
+            _cache.posts[id] = _cache.posts[id] || post(base, locale, id)
+            return _cache.posts[id]            
         }
     }
 }

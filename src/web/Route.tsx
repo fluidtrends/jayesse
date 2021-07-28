@@ -10,7 +10,8 @@ export const Route: any = (props : any) => {
     const { isPrivate, type, components } = props
     const { useCarmel, useViewport } = hooks
     const dispatch = useDispatch()
-    const { ready, account, session } = useCarmel(props, dispatch)
+    const carmel = useCarmel(props, dispatch)
+    const { ready, account, session } = carmel
 
     const viewport = useViewport()  
     const GlobalStyle = globals.styles({ viewport, theme: props.theme }) 
@@ -30,7 +31,7 @@ export const Route: any = (props : any) => {
     }
 
     return (<Container {...props}>
-        { components.map((component: any, i: number) => renderComponent(component, i, props, session)) }
+        { components.map((component: any, i: number) => renderComponent(component, i, { ...props, account, carmel, viewport }, session)) }
         <GlobalStyle/>
     </Container>)
 }
