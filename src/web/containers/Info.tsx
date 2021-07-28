@@ -1,18 +1,22 @@
 import React, { FC } from 'react'
 import { Fade } from 'react-awesome-reveal'
-import { Layout } from 'antd'
+import { Layout, Typography } from 'antd'
 
-import { InfoProps } from '../../types/containers'
+import { ContainerProps } from '../../types/containers'
 import * as styles from '../../styles'
 
 const { Content } = Layout
+const { Title } = Typography 
 
-export const Info: FC <InfoProps> = props => {
+export const Info: FC <ContainerProps> = props => {
+  console.log(props)
   return (
     <Fade style={{ width: "100%" }}>
-      <Content style={styles.layouts.fullscreen}>
-        <h1 style={styles.fonts.title}> { props.title } </h1>
-        <h2 style={styles.fonts.subtitle}> { props.subtitle } </h2>
+      <Content style={{
+        ...styles.layouts.fullscreen
+        }}>
+        <Title level={1}> { props.title } </Title>
+        <Title level={3}> { props.subtitle } </Title>
       </Content>    
     </Fade>
   )

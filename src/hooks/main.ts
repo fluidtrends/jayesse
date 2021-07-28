@@ -32,36 +32,19 @@ export const useGitHubDocs = (repo: string, root: string, branch: string, path: 
     error && { error })
 }
 
-export const useDocument = (url: string) => {
-    const [document, setDocument] = useState("")
+export const useText = (url: string) => {
+    const [text, setText] = useState("")
 
     useEffect(() => {
       (async function() {
         try {
             const response = await fetch(url)
             const text = await response.text()
-            setDocument(text)
+            setText(text)
         } catch {
         }
     })()
     }, []);
 
-    return document
-}
-
-export const useScroll = () => {
-  const [scrollPosition, setScrollPosition] = useState(0)
-
-  const onScroll = () => {
-    const { scrollTop } = document.documentElement || document.body
-
-    setScrollPosition(scrollTop)
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)  
-  }, [])
-
-  return scrollPosition
+    return text
 }

@@ -1,16 +1,14 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { useGitHubDocs } from '../../hooks'
-import { useHistory, withRouter, useRouteMatch, useLocation, useParams } from "react-router-dom"
+import { useHistory, withRouter, useLocation } from "react-router-dom"
 import { Layout, Skeleton, Menu } from 'antd'
 import { Fade } from 'react-awesome-reveal'
 import ReactMarkdown from 'react-markdown'
-import { DocumentProps, MenuItemProps } from '../../types/components'
+import { MenuItemProps } from '../../types/components'
 import { SideMenu } from '.'
 import highlightStyle from "react-syntax-highlighter/dist/cjs/styles/prism/okaidia"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import MediaQuery from 'react-responsive'
-
-import * as styles from '../../styles'
 
 const CodeBlock: React.FC<{ language: string, value: string }> = props => {
     const { language, value } = props
@@ -23,7 +21,7 @@ const CodeBlock: React.FC<{ language: string, value: string }> = props => {
 
 const { Content } = Layout
 
-export const Document = withRouter((props: any) => {
+export const Document: any = withRouter((props: any) => {
   const { repo, branch, root, mount } = props
     
   const history = useHistory()

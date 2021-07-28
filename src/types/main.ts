@@ -1,4 +1,19 @@
-import { InfoProps } from './containers'
+import 'react'
+
+declare module 'react' {
+    interface StyleHTMLAttributes<T> extends React.HTMLAttributes<T> {
+        jsx?: boolean;
+        global?: boolean;
+    }
+}
+
+export interface Viewport {
+    isSmall: boolean
+    width: number
+    isPortrait: boolean
+    scale: number
+    height: number
+}
 
 export interface GuideStep {
     message: string
@@ -20,12 +35,6 @@ export interface GuideProps {
 export interface AppProps {
     name: string
     chunks: any
-    routes: any[]
-    notfound: InfoProps
+    routes: any
     [key: string]: any
-}
-
-export interface NavigatorProps {
-    routes: any[]
-    notfound: InfoProps
 }

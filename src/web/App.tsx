@@ -1,28 +1,23 @@
 import React from 'react'
-
-import {
-   Switch,
-   Route
-} from "react-router-dom"
-
-import { Containers } from '.'
 import { AppProps } from '../types'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
+import { Router } from './Router'
+
+import { containers, components } from '.'
 
 /**
  * 
  * @param props 
  */
-export const App: React.FC<AppProps> = (props) => {
- 
+export const App: React.FC<AppProps> = (props) => { 
+  const { store, persistor } = props 
+
   return (
-      <Switch>
-         { props.routes.map((route: any, i: number) => (
-            <Route strict sensitive exact={route.path === '/'} key={`${route.id}`} path={route.path}>
-                <Containers.Main {...props} {...route} />
-            </Route>
-         ))}
-         <Route key={`_notfound`} render={() => (
-            <Containers.Info {...props.notfound } />
-         )}/>
-      </Switch>
-)}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+          <Router {...props} />
+      </PersistGate>
+    </Provider>
+  )
+}

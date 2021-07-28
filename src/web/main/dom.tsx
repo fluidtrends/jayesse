@@ -1,46 +1,30 @@
-// import React from 'react'
-// import ReactDOM from 'react-dom'
-// import { BrowserRouter as Router } from "react-router-dom"
- 
-// import { App } from '..'
-// import resolve from '../../resolve'
-
-// ReactDOM.render(<Router>
-//     <App { ...resolve('web') } />
-// </Router>, document.getElementById('app'))
-
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { 
-    BrowserRouter 
-} from "react-router-dom"
+import { render } from 'react-dom'
+import { renderApp } from './render'
 
-import { App } from '..'
-import resolve from '../../resolve'
-import assets from '../../assets'
+const { app } = renderApp() 
 
-let basename = '/'
-// const segments = window?.location?.pathname.split('/')
+import { setup } from 'twind';
 
-// if (segments && segments.length > 3 && ['ipfs', 'ipns'].includes(segments[1])) {
-//     basename = `/${segments[1]}/${segments[2]}/`
-// }
+const twindConfig =  {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#00BCD4',
+        'primary-100': '#B2EBF2',
+        'primary-800': '#00838F',
+      },
+      fontFamily: {
+        sans: `Inter, ui-sans-serif, system-ui, -apple-system,
+            BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+            sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
+      },
+    },
+  },
+}
 
-ReactDOM.render(<BrowserRouter basename={basename}>
-    <App {...resolve('web')} basename={basename} assets={assets(basename)}/>
-</BrowserRouter>, document.getElementById('app'))
+if (typeof window !== `undefined`) {
+  setup(twindConfig)
+}
 
-// export default (options?: any) => {
-//     <StaticRouter location="/">
-//         <App { ...resolve('web') } />
-//     </StaticRouter>
-
-//     // const html = ReactDOMServer.renderToString(
-//     // <ResponsiveContext.Provider value={{ width: 800 }}>
-//     //     <ResponsiveContext.Provider value={{ width: 800 }}>
-//     //     <App { ...resolve('web') } />
-//     // </ResponsiveContext.Provider>
-//     // </ResponsiveContext.Provider>)
-
-//     // return html
-// }
+render(app, document.getElementById('app'))

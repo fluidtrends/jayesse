@@ -1,19 +1,22 @@
 {
     "compilerOptions": {
-      "target": "es5",                
+      "target": "es2017",                
       "module": "commonjs",                     
       "strict": true,             
       "jsx": "react",     
       "resolveJsonModule": false,
       "sourceMap": true,
+      "skipLibCheck": true,
       "allowJs": true,
+      "noEmitHelpers": false,
       "declaration": true,         
+      "moduleResolution": "node",
       "esModuleInterop": true,                 
       "forceConsistentCasingInFileNames": true,
       "outDir": "./lib"
     },
     "include": [
-      "src/**/*"
+      "src/**/*", "assets/workers"
     ]
 }
   

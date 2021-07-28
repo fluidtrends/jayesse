@@ -1,16 +1,10 @@
 import React, { useCallback } from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd'
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from '@ant-design/icons'
+import { Layout, Menu } from 'antd'
 
 import { MenuProps, MenuItemProps } from '../../types/components'
-import * as styles from '../../styles'
 
 const { SubMenu, Item } = Menu
-const { Header, Content, Sider } = Layout
+const { Sider } = Layout
 
 export const SideMenu: React.FC<MenuProps> = props => {
 

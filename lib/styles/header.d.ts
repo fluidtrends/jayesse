@@ -1,8 +1,12 @@
 import { CSSProperties } from 'react';
 export declare const top: CSSProperties;
 export declare const logo: CSSProperties;
+export declare const logoLarge: CSSProperties;
 export declare const menu: CSSProperties;
 export declare const header: CSSProperties;
+export declare const headerLarge: {
+    height: number;
+};
 export declare const headerInverted: CSSProperties;
 export declare const headerDepth: CSSProperties;
 export declare const menuItemIcon: CSSProperties;
